@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 // パクった
 // https://qiita.com/pullphone/items/1b4f4f1c973d9b9342aa
 
-class Canvas extends React.Component {
+class Canvas extends Component {
 
     constructor() {
         super();
