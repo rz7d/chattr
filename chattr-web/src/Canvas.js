@@ -4,32 +4,35 @@ import React, { Component } from 'react';
 // https://qiita.com/pullphone/items/1b4f4f1c973d9b9342aa
 
 class Canvas extends Component {
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { touch: false };
     }
 
-    getContext() {
+    getContext = () => {
         return this.refs.canvas.getContext("2d");
     }
 
-    begin(x, y) {
+    begin = (e) => {
+        const x = e.nativeEvent.offsetX
+        const y = e.nativeEvent.offsetY
         this.setState({ touch: true });
         const context = this.getContext();
         context.strokeStyle = "#09d3ac";
         context.moveTo(x, y);
     }
 
-    end() {
+    end = () => {
         this.setState({ touch: false });
     }
 
-    draw(x, y) {
+    draw = (e) => {
         if (!this.state.touch) {
             return;
         }
 
+        const x = e.nativeEvent.offsetX
+        const y = e.nativeEvent.offsetY
         const context = this.getContext();
         context.lineTo(x, y);
         context.stroke();
@@ -42,15 +45,14 @@ class Canvas extends Component {
                 ref="canvas"
                 width="512"
                 height="512"
-                onMouseDown={e => this.begin(e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
-                onMouseUp={() => this.end()}
-                onMouseEnter={() => this.end()}
-                onMouseLeave={() => this.end()}
-                onMouseMove={e => this.draw(e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
+                onMouseDown={this.begin}
+                onMouseUp={this.end}
+                onMouseEnter={this.end}
+                onMouseLeave={this.end}
+                onMouseMove={this.draw}
             />
         )
     }
-
 }
 
 export default Canvas;

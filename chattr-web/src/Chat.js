@@ -16,7 +16,6 @@ class Chat extends Component {
             </div>
         )
     }
-
 }
 
 export default Chat;
