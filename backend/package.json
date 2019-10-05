@@ -1,0 +1,12 @@
+{
+  "name": "chatttttttttttttttttttttttttttttttttttttttttwttr",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "azure",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "ws": "^7.1.2"
+  }
+}

@@ -1,0 +1,30 @@
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+.App-container {
+  width: 100%;
+  height: 100%;
+
+  background-color: #282c34;
+  color: #09d3ac;
+  display: flex;
+}
+
+.App-draw {
+  width: 85%;
+  border-right: #09d3ac 1px solid;
+}
+
+.App-draw * {
+  width: 100%;
+  height: 100%;
+}
+
+.App-chat {
+  display: flex;
+  flex-direction: row;
+  align-items: initial;
+  justify-content: center;
+}
