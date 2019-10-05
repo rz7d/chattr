@@ -1,8 +1,5 @@
 import React from 'react';
 
-import Measure from "react-measure"
-import connect from "react-redux"
-
 // パクった
 // https://qiita.com/pullphone/items/1b4f4f1c973d9b9342aa
 
@@ -10,22 +7,26 @@ class Canvas extends React.Component {
 
     constructor() {
         super();
-        this.state = { touching: false };
+        this.state = { touch: false };
     }
 
     getContext() {
         return this.refs.canvas.getContext("2d");
     }
 
-    startDrawing(x, y) {
-        this.setState({ touching: true });
+    begin(x, y) {
+        this.setState({ touch: true });
         const context = this.getContext();
         context.strokeStyle = "#09d3ac";
         context.moveTo(x, y);
     }
 
+    end() {
+        this.setState({ touch: false });
+    }
+
     draw(x, y) {
-        if (!this.state.touching) {
+        if (!this.state.touch) {
             return;
         }
 
@@ -34,25 +35,19 @@ class Canvas extends React.Component {
         context.stroke();
     }
 
-    endDrawing() {
-        this.setState({ touching: false });
-    }
-
     render() {
         return (
-            <Measure onMeasure={({width, height}) => dispatch}>
-                <canvas
-                    className="App-canvas"
-                    ref="canvas"
-                    width={({width})}
-                    height={({height})}
-                    onMouseDown={e => this.startDrawing(e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
-                    onMouseUp={() => this.endDrawing()}
-                    onMouseEnter={() => this.endDrawing()}
-                    onMouseLeave={() => this.endDrawing()}
-                    onMouseMove={e => this.draw(e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
-                />
-            </Measure>
+            <canvas
+                className="App-canvas"
+                ref="canvas"
+                width="512"
+                height="512"
+                onMouseDown={e => this.begin(e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
+                onMouseUp={() => this.end()}
+                onMouseEnter={() => this.end()}
+                onMouseLeave={() => this.end()}
+                onMouseMove={e => this.draw(e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
+            />
         )
     }
 
