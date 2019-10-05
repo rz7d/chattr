@@ -15,7 +15,7 @@ io.on("connection", socket => {
     let users = [];
 
     socket.on("contract", user => {
-        users[user.id] = user.name;
+        users[socket.id] = user.name;
     });
 
     socket.on("chat", msg => {
