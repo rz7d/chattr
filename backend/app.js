@@ -18,10 +18,10 @@ io.on("connection", socket => {
         users[socket.id] = user.name;
     });
 
-    socket.on("chat", msg => {
+    socket.on("chat", content => {
         io.emit("chat", {
             name: users[socket.id],
-            content: msg
+            content: content
         });
     });
 
